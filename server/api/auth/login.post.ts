@@ -7,7 +7,10 @@ export default defineEventHandler(async (event) => {
   );
 
   if (!user) {
-    return { error: 'Invalid credentials' };
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid Credential',
+    });
   }
 
   return { success: true, userId: user.id, message: 'Login successful' };
