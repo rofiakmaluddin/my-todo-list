@@ -3,7 +3,7 @@ defineProps<{
   title: string;
   description: string;
   onSubmit: (e?: Event) => Promise<void | undefined>;
-  mode: 'login' | 'register';
+  mode?: 'login' | 'register';
 }>();
 </script>
 
@@ -23,7 +23,7 @@ defineProps<{
       <NuxtLink v-if="mode === 'register'" to="/auth/login">
         Already have an account? Login here.
       </NuxtLink>
-      <NuxtLink v-else to="/auth/register">
+      <NuxtLink v-else-if="mode === 'login'" to="/auth/register">
         Don't have an account? Register here.
       </NuxtLink>
     </CardContent>

@@ -27,7 +27,7 @@ const form = useForm({
 
 const mutation = useMutation({
   mutationFn: login,
-  onSuccess: () => {
+  onSuccess: (data) => {
     toast({
       title: 'You are logged in',
       description: 'Manage your todo now',
