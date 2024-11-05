@@ -32,6 +32,7 @@ const mutation = useMutation({
       title: 'You are logged in',
       description: 'Manage your todo now',
     });
+    localStorage.setItem('user_session', JSON.stringify(data));
     router.push('/');
   },
   onError(error: any) {
