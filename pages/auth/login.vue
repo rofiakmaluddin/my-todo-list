@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { useMutation } from '@tanstack/vue-query';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
 import * as z from 'zod';
+import { login } from '~/apis/auth';
+import { useToast } from '~/components/ui/toast';
+
+const { toast } = useToast();
+const router = useRouter();
 
 const label = {
   userId: 'User ID',
@@ -19,8 +25,25 @@ const form = useForm({
   validationSchema: formSchema,
 });
 
+const mutation = useMutation({
+  mutationFn: login,
+  onSuccess: (data) => {
+    toast({
+      title: 'You are logged in',
+      description: 'Manage your todo now',
+    });
+    router.push('/');
+  },
+  onError(error: any) {
+    toast({
+      title: error.response.data.statusMessage,
+      variant: 'destructive',
+    });
+  },
+});
+
 const onSubmit = form.handleSubmit((values) => {
-  console.log(values);
+  mutation.mutate(values);
 });
 </script>
 

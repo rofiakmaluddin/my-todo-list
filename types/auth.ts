@@ -1,5 +1,5 @@
-export interface IRegisterPayload {
+export interface IAuthPayload {
   id: string;
-  name: string;
+  name?: string;
   password: string;
 }
